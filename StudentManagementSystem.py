@@ -101,6 +101,36 @@ def delete_student():
     print("\nStudent not found.")
 
 
+def calculate_grade():
+    print("\n========== CALCULATE GRADE ==========")
+
+    student_id = int(input("Enter Student ID: "))
+
+    for student in students:
+        if student["id"] == student_id:
+            marks = student["marks"]
+
+            if marks >= 90:
+                grade = "A+"
+            elif marks >= 80:
+                grade = "A"
+            elif marks >= 70:
+                grade = "B"
+            elif marks >= 60:
+                grade = "C"
+            elif marks >= 50:
+                grade = "D"
+            else:
+                grade = "F"
+
+            print("\nStudent Name :", student["name"])
+            print("Marks        :", marks)
+            print("Grade        :", grade)
+            return
+
+    print("\nStudent not found.")
+
+
 
 def main():
     while True:
@@ -134,7 +164,7 @@ def main():
             delete_student()
 
         elif choice == "6":
-            print("\nCalculate Grade selected.")
+            calculate_grade()
 
         elif choice == "7":
             print("\nThank you for using Student Management System.")
