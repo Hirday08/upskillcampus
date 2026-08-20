@@ -41,6 +41,29 @@ def view_students():
         print("Marks      :", student["marks"])
         print("----------------------------------")
 
+
+def search_student():
+    print("\n========== SEARCH STUDENT ==========")
+
+    student_id = int(input("Enter Student ID to search: "))
+
+    for student in students:
+        if student["id"] == student_id:
+            print("\nStudent Found!")
+            print("----------------------------------")
+            print("Student ID :", student["id"])
+            print("Name       :", student["name"])
+            print("Age        :", student["age"])
+            print("Course     :", student["course"])
+            print("Year       :", student["year"])
+            print("Marks      :", student["marks"])
+            print("----------------------------------")
+            return
+
+    print("\nStudent not found.")
+
+
+
 def main():
     while True:
         print("\n========================================")
@@ -64,7 +87,7 @@ def main():
             view_students()
 
         elif choice == "3":
-            print("\nSearch Student selected.")
+            search_student()
 
         elif choice == "4":
             print("\nUpdate Student selected.")
