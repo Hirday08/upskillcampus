@@ -64,6 +64,29 @@ def search_student():
 
 
 
+def update_student():
+    print("\n========== UPDATE STUDENT ==========")
+
+    student_id = int(input("Enter Student ID to update: "))
+
+    for student in students:
+        if student["id"] == student_id:
+            print("\nStudent Found!")
+            print("Enter new details:")
+
+            student["name"] = input("Enter Student Name: ")
+            student["age"] = int(input("Enter Student Age: "))
+            student["course"] = input("Enter Course: ")
+            student["year"] = int(input("Enter Year: "))
+            student["marks"] = float(input("Enter Marks: "))
+
+            print("\nStudent record updated successfully!")
+            return
+
+    print("\nStudent not found.")
+
+
+
 def main():
     while True:
         print("\n========================================")
@@ -90,7 +113,7 @@ def main():
             search_student()
 
         elif choice == "4":
-            print("\nUpdate Student selected.")
+            update_student()
 
         elif choice == "5":
             print("\nDelete Student selected.")
