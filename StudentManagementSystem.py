@@ -25,6 +25,22 @@ def add_student():
 
     print("\nStudent added successfully!")
 
+def view_students():
+    print("\n========== ALL STUDENTS ==========")
+
+    if len(students) == 0:
+        print("No student records found.")
+        return
+
+    for student in students:
+        print("\nStudent ID :", student["id"])
+        print("Name       :", student["name"])
+        print("Age        :", student["age"])
+        print("Course     :", student["course"])
+        print("Year       :", student["year"])
+        print("Marks      :", student["marks"])
+        print("----------------------------------")
+
 def main():
     while True:
         print("\n========================================")
@@ -45,7 +61,7 @@ def main():
             add_student()
 
         elif choice == "2":
-            print("\nView All Students selected.")
+            view_students()
 
         elif choice == "3":
             print("\nSearch Student selected.")
@@ -65,10 +81,6 @@ def main():
 
         else:
             print("\nInvalid choice. Please enter a number from 1 to 7.")
-
-
-if __name__ == "__main__":
-    main()
 
 
 if __name__ == "__main__":
