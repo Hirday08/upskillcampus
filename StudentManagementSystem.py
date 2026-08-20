@@ -87,6 +87,21 @@ def update_student():
 
 
 
+def delete_student():
+    print("\n========== DELETE STUDENT ==========")
+
+    student_id = int(input("Enter Student ID to delete: "))
+
+    for student in students:
+        if student["id"] == student_id:
+            students.remove(student)
+            print("\nStudent record deleted successfully!")
+            return
+
+    print("\nStudent not found.")
+
+
+
 def main():
     while True:
         print("\n========================================")
@@ -116,7 +131,7 @@ def main():
             update_student()
 
         elif choice == "5":
-            print("\nDelete Student selected.")
+            delete_student()
 
         elif choice == "6":
             print("\nCalculate Grade selected.")
