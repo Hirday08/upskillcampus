@@ -5,15 +5,76 @@ import json
 students = []
 FILE_NAME = "students.json"
 
+def get_integer(prompt, min_value=None, max_value=None):
+    while True:
+        try:
+            value = int(input(prompt))
+
+            if min_value is not None and value < min_value:
+                print(f"Value must be at least {min_value}.")
+                continue
+
+            if max_value is not None and value > max_value:
+                print(f"Value must not be greater than {max_value}.")
+                continue
+
+            return value
+
+        except ValueError:
+            print("Invalid input. Please enter a valid number.")
+
+
+def get_marks(prompt):
+    while True:
+        try:
+            marks = float(input(prompt))
+
+            if 0 <= marks <= 100:
+                return marks
+
+            print("Marks must be between 0 and 100.")
+
+        except ValueError:
+            print("Invalid input. Please enter a valid number.")
+
 def add_student():
     print("\n========== ADD STUDENT ==========")
 
-    student_id = int(input("Enter Student ID: "))
-    name = input("Enter Student Name: ")
-    age = int(input("Enter Student Age: "))
-    course = input("Enter Course: ")
-    year = int(input("Enter Year: "))
-    marks = float(input("Enter Marks: "))
+    student_id = get_integer(
+        "Enter Student ID: ",
+        min_value=1
+    )
+
+    for student in students:
+        if student["id"] == student_id:
+            print("A student with this ID already exists.")
+            return
+
+    name = input("Enter Student Name: ").strip()
+
+    while not name:
+        print("Name cannot be empty.")
+        name = input("Enter Student Name: ").strip()
+
+    age = get_integer(
+        "Enter Student Age: ",
+        min_value=1,
+        max_value=100
+    )
+
+    course = input("Enter Course: ").strip()
+
+    while not course:
+        print("Course cannot be empty.")
+        course = input("Enter Course: ").strip()
+
+    year = get_integer(
+        "Enter Year: ",
+        min_value=1,
+        max_value=4
+    )
+
+    marks = get_marks("Enter Marks: ")
 
     student = {
         "id": student_id,
@@ -49,7 +110,10 @@ def view_students():
 def search_student():
     print("\n========== SEARCH STUDENT ==========")
 
-    student_id = int(input("Enter Student ID to search: "))
+    student_id = get_integer(
+    "Enter Student ID to search: ",
+    min_value=1
+)
 
     for student in students:
         if student["id"] == student_id:
@@ -71,31 +135,64 @@ def search_student():
 def update_student():
     print("\n========== UPDATE STUDENT ==========")
 
-    student_id = int(input("Enter Student ID to update: "))
+    student_id = get_integer(
+        "Enter Student ID to update: ",
+        min_value=1
+    )
 
     for student in students:
         if student["id"] == student_id:
             print("\nStudent Found!")
             print("Enter new details:")
 
-            student["name"] = input("Enter Student Name: ")
-            student["age"] = int(input("Enter Student Age: "))
-            student["course"] = input("Enter Course: ")
-            student["year"] = int(input("Enter Year: "))
-            student["marks"] = float(input("Enter Marks: "))
+            name = input("Enter Student Name: ").strip()
 
-            student["marks"] = float(input("Enter Marks: "))
+            while not name:
+                print("Name cannot be empty.")
+                name = input("Enter Student Name: ").strip()
+
+            age = get_integer(
+                "Enter Student Age: ",
+                min_value=1,
+                max_value=100
+            )
+
+            course = input("Enter Course: ").strip()
+
+            while not course:
+                print("Course cannot be empty.")
+                course = input("Enter Course: ").strip()
+
+            year = get_integer(
+                "Enter Year: ",
+                min_value=1,
+                max_value=4
+            )
+
+            marks = get_marks("Enter Marks: ")
+
+            student["name"] = name
+            student["age"] = age
+            student["course"] = course
+            student["year"] = year
+            student["marks"] = marks
 
             save_students()
 
-    print("\nStudent record updated successfully!")
+            print("\nStudent record updated successfully!")
+            return
+
+    print("\nStudent not found.")
 
 
 
 def delete_student():
     print("\n========== DELETE STUDENT ==========")
 
-    student_id = int(input("Enter Student ID to delete: "))
+    student_id = get_integer(
+    "Enter Student ID to delete: ",
+    min_value=1
+)
 
     for student in students:
         if student["id"] == student_id:
@@ -111,7 +208,10 @@ def delete_student():
 def calculate_grade():
     print("\n========== CALCULATE GRADE ==========")
 
-    student_id = int(input("Enter Student ID: "))
+    student_id = get_integer(
+    "Enter Student ID: ",
+    min_value=1
+)
 
     for student in students:
         if student["id"] == student_id:
