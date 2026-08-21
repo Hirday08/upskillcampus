@@ -249,10 +249,18 @@ def load_students():
     except FileNotFoundError:
         students = []
 
+    except json.JSONDecodeError:
+        print("Warning: Student data file is invalid.")
+        students = []
+
 
 def save_students():
-    with open(FILE_NAME, "w") as file:
-        json.dump(students, file, indent=4)
+    try:
+        with open(FILE_NAME, "w") as file:
+            json.dump(students, file, indent=4)
+
+    except OSError:
+        print("Error: Unable to save student records.")
 
 
 
