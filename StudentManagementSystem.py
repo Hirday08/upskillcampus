@@ -1,6 +1,9 @@
 # Python-Based Student Management System
 
+import json
+
 students = []
+FILE_NAME = "students.json"
 
 def add_student():
     print("\n========== ADD STUDENT ==========")
@@ -22,6 +25,7 @@ def add_student():
     }
 
     students.append(student)
+    save_students()
 
     print("\nStudent added successfully!")
 
@@ -80,10 +84,11 @@ def update_student():
             student["year"] = int(input("Enter Year: "))
             student["marks"] = float(input("Enter Marks: "))
 
-            print("\nStudent record updated successfully!")
-            return
+            student["marks"] = float(input("Enter Marks: "))
 
-    print("\nStudent not found.")
+            save_students()
+
+    print("\nStudent record updated successfully!")
 
 
 
@@ -95,6 +100,8 @@ def delete_student():
     for student in students:
         if student["id"] == student_id:
             students.remove(student)
+            save_students()
+
             print("\nStudent record deleted successfully!")
             return
 
@@ -132,7 +139,25 @@ def calculate_grade():
 
 
 
+def load_students():
+    global students
+
+    try:
+        with open(FILE_NAME, "r") as file:
+            students = json.load(file)
+
+    except FileNotFoundError:
+        students = []
+
+
+def save_students():
+    with open(FILE_NAME, "w") as file:
+        json.dump(students, file, indent=4)
+
+
+
 def main():
+    load_students()
     while True:
         print("\n========================================")
         print("       STUDENT MANAGEMENT SYSTEM")
