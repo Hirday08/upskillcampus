@@ -240,6 +240,39 @@ def calculate_grade():
     print("\nStudent not found.")
 
 
+def performance_analysis():
+    print("\n========== PERFORMANCE ANALYSIS ==========")
+
+    if len(students) == 0:
+        print("No student records found.")
+        return
+
+    df = pd.DataFrame(students)
+
+    marks = np.array(df["marks"])
+
+    print("\nStudent Performance Table:")
+    print(df[["id", "name", "course", "marks"]].to_string(index=False))
+
+    print("\n========== STATISTICS ==========")
+    print("Total Students       :", len(df))
+    print("Average Marks        :", round(np.mean(marks), 2))
+    print("Median Marks         :", round(np.median(marks), 2))
+    print("Highest Marks        :", np.max(marks))
+    print("Lowest Marks         :", np.min(marks))
+    print("Standard Deviation   :", round(np.std(marks), 2))
+
+    passed = len(df[df["marks"] >= 50])
+    failed = len(df[df["marks"] < 50])
+
+    print("Passed Students      :", passed)
+    print("Failed Students      :", failed)
+
+    print("\nStudents Sorted by Marks:")
+    sorted_df = df.sort_values(by="marks", ascending=False)
+    print(sorted_df[["id", "name", "marks"]].to_string(index=False))
+
+
 
 def load_students():
     global students
