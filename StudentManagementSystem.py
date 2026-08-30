@@ -144,43 +144,109 @@ def update_student():
 
     for student in students:
         if student["id"] == student_id:
+
             print("\nStudent Found!")
-            print("Enter new details:")
+            print("----------------------------------")
+            print("Student ID :", student["id"])
+            print("Name       :", student["name"])
+            print("Age        :", student["age"])
+            print("Course     :", student["course"])
+            print("Year       :", student["year"])
+            print("Marks      :", student["marks"])
+            print("----------------------------------")
 
-            name = input("Enter Student Name: ").strip()
+            print("\nWhat would you like to update?")
+            print("1. Name")
+            print("2. Age")
+            print("3. Course")
+            print("4. Year")
+            print("5. Marks")
+            print("6. Update All")
+            print("7. Cancel")
 
-            while not name:
-                print("Name cannot be empty.")
-                name = input("Enter Student Name: ").strip()
+            choice = input("Enter your choice: ")
 
-            age = get_integer(
-                "Enter Student Age: ",
-                min_value=1,
-                max_value=100
-            )
+            if choice == "1":
+                name = input("Enter new Student Name: ").strip()
 
-            course = input("Enter Course: ").strip()
+                while not name:
+                    print("Name cannot be empty.")
+                    name = input("Enter new Student Name: ").strip()
 
-            while not course:
-                print("Course cannot be empty.")
-                course = input("Enter Course: ").strip()
+                student["name"] = name
 
-            year = get_integer(
-                "Enter Year: ",
-                min_value=1,
-                max_value=4
-            )
+            elif choice == "2":
+                student["age"] = get_integer(
+                    "Enter new Student Age: ",
+                    min_value=1,
+                    max_value=100
+                )
 
-            marks = get_marks("Enter Marks: ")
+            elif choice == "3":
+                course = input("Enter new Course: ").strip()
 
-            student["name"] = name
-            student["age"] = age
-            student["course"] = course
-            student["year"] = year
-            student["marks"] = marks
+                while not course:
+                    print("Course cannot be empty.")
+                    course = input("Enter new Course: ").strip()
+
+                student["course"] = course
+
+            elif choice == "4":
+                student["year"] = get_integer(
+                    "Enter new Year: ",
+                    min_value=1,
+                    max_value=4
+                )
+
+            elif choice == "5":
+                student["marks"] = get_marks(
+                    "Enter new Marks: "
+                )
+
+            elif choice == "6":
+                name = input("Enter new Student Name: ").strip()
+
+                while not name:
+                    print("Name cannot be empty.")
+                    name = input("Enter new Student Name: ").strip()
+
+                age = get_integer(
+                    "Enter new Student Age: ",
+                    min_value=1,
+                    max_value=100
+                )
+
+                course = input("Enter new Course: ").strip()
+
+                while not course:
+                    print("Course cannot be empty.")
+                    course = input("Enter new Course: ").strip()
+
+                year = get_integer(
+                    "Enter new Year: ",
+                    min_value=1,
+                    max_value=4
+                )
+
+                marks = get_marks(
+                    "Enter new Marks: "
+                )
+
+                student["name"] = name
+                student["age"] = age
+                student["course"] = course
+                student["year"] = year
+                student["marks"] = marks
+
+            elif choice == "7":
+                print("\nUpdate cancelled.")
+                return
+
+            else:
+                print("\nInvalid choice.")
+                return
 
             save_students()
-
             print("\nStudent record updated successfully!")
             return
 
