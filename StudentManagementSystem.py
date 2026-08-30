@@ -1,6 +1,8 @@
 # Python-Based Student Management System
 
 import json
+import numpy as np
+import pandas as pd
 
 students = []
 FILE_NAME = "students.json"
