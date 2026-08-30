@@ -311,7 +311,8 @@ def main():
         print("4. Update Student")
         print("5. Delete Student")
         print("6. Calculate Grade")
-        print("7. Exit")
+        print("7. Performance Analysis")
+        print("8. Exit")
         print("========================================")
 
         choice = input("Enter your choice: ")
@@ -335,11 +336,14 @@ def main():
             calculate_grade()
 
         elif choice == "7":
+            performance_analysis()
+
+        elif choice == "8":
             print("\nThank you for using Student Management System.")
             break
 
         else:
-            print("\nInvalid choice. Please enter a number from 1 to 7.")
+            print("\nInvalid choice. Please enter a number from 1 to 8.")
 
 
 if __name__ == "__main__":
